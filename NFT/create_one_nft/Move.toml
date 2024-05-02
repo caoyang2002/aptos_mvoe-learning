@@ -5,11 +5,13 @@ authors = []
 
 [addresses]
 
+MyNFT = "0xa943cdb8e7da4eed2b37db0d62b8094d240a7455ec3e8c75303676b041ce6f1c"
+
 [dev-addresses]
 
-[dependencies.AptosFramework]
+[dependencies.AptosTokenbjects]
 git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
-subdir = "aptos-move/framework/aptos-framework"
+rev = "testnet"
+subdir = "aptos-move/framework/aptos-token-objects"
 
 [dev-dependencies]
