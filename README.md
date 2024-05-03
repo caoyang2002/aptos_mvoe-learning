@@ -5,7 +5,7 @@
 
 - [中文自述文件](Docs/zh/README_zh.md)
 
-- [English Readme](Docs/en/READEME.md)
+- [English Readme](Docs/en/README.md)
 ---
 
 ### English
