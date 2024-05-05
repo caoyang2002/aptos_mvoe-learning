@@ -21,12 +21,15 @@
 
 # aptos_mvoe-learning
 
-目录: 
 
+目录: 
 <details>
 <summary>
-- [创建第一个-NFT](#一、创建一个-NFT) : 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
 </summary>
+
+- [创建第一个-NFT](#一、创建一个-NFT) : 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
+
+-
 </details>
 
 
