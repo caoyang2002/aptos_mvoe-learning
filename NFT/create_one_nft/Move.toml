@@ -5,7 +5,8 @@ authors = []
 
 [addresses]
 
-MyNFT = "0x726e1dd7bc7ac1939035078633c0fbf273a063cfa54dc532f326e5f6066edcbd"
+
+MyNFT = "0x9357f3115746bcf76e67e4206bfe0db98d4bff1a35bec131ab8d321abfd272b0"
 
 [dev-addresses]
 

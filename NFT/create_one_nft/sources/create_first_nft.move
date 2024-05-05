@@ -58,12 +58,11 @@ module MyNFT::first_NFT{
     /// ERROR_NO_OWNER
     const ERROR_NO_OWNER:u64 = 404;
     // step three: burn NFT
-    public entry fun burn(creator:&signer,token:Object<TokenRefsStore>) acquires TokenRefsStore {
-        assert!(object::is_owner(token,signer::address_of(creator)),ERROR_NO_OWNER);
+    public entry fun burn(creator:&signer) acquires TokenRefsStore {
+        // let token_address  = object::object_address(&token);
         let TokenRefsStore{
             burn_ref,
-        } = move_from<TokenRefsStore>(object::object_address(&token));
-
+        } = move_from<TokenRefsStore>(signer::address_of(creator));
         token::burn(burn_ref)
     }
 }
