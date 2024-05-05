@@ -3,22 +3,10 @@ module MyNFT::first_NFT{
     use std::option;
     use std::signer;
     use std::string;
-    use aptos_framework::object;
-    use aptos_framework::object::Object;
     use aptos_token_objects::collection;
     use aptos_token_objects::royalty;
     use aptos_token_objects::token;
-    use aptos_token_objects::token::Token;
 
-    // collection
-    const CollectionDescription:vector<u8> = b"collection_description";
-    const CollectionName:vector<u8> = b"collection_name";
-    const CollectionURI:vector<u8> = b"collection_uri";
-    // token info
-    const TokenDescription:vector<u8> = b"token_description";
-    const TokenName:vector<u8> = b"token_name";
-    const TokenURI:vector<u8> = b"token_uri";
-    // token ref manager
     struct TokenRefsStore has key {
         burn_ref: token::BurnRef,
     }
@@ -28,11 +16,11 @@ module MyNFT::first_NFT{
         let max_supply = 1000;
         let collection_construcor_ref = &collection::create_fixed_collection(
             creator,
-            string::utf8(CollectionDescription),
+            string::utf8(b"collection_description"),
             max_supply,
-            string::utf8(CollectionName),
+            string::utf8(b"collection_name"),
             option::some(royalty::create(1,1,signer::address_of(creator))),
-            string::utf8(CollectionURI)
+            string::utf8(b"collectionURI"),
         );
     }
 
@@ -40,11 +28,11 @@ module MyNFT::first_NFT{
     public entry fun mint(creator: &signer){
         let token_constructor_ref = &token::create(
             creator,
-            string::utf8(CollectionName),
-            string::utf8(TokenDescription),
-            string::utf8(TokenName),
+            string::utf8(b"collection_name"),
+            string::utf8(b"token_description"),
+            string::utf8(b"token_name"),
             option::some(royalty::create(1,1,signer::address_of(creator))),
-            string::utf8(TokenURI)
+            string::utf8(b"token_uri")
             );
         // Create a reference for burning an NFT
         let burn_ref = token::generate_burn_ref(token_constructor_ref);
@@ -56,11 +44,7 @@ module MyNFT::first_NFT{
         );
     }
 
-    /// ERROR_NO_OWNER
-    const ERROR_NO_OWNER:u64 = 404;
-    // step three: burn NFT
     public entry fun burn(creator:&signer) acquires TokenRefsStore {
-        // let token_address  = object::object_address(&token);
         let TokenRefsStore{
             burn_ref,
         } = move_from<TokenRefsStore>(signer::address_of(creator));
