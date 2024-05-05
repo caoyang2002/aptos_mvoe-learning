@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/NFT/create_one_nft/build" />
       <excludeFolder url="file://$MODULE_DIR$/Move/hello_world/build" />
+      <excludeFolder url="file://$MODULE_DIR$/NFT/update_nft_content_string/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

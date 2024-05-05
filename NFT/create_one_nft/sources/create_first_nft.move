@@ -8,6 +8,7 @@ module MyNFT::first_NFT{
     use aptos_token_objects::collection;
     use aptos_token_objects::royalty;
     use aptos_token_objects::token;
+    use aptos_token_objects::token::Token;
 
     // collection
     const CollectionDescription:vector<u8> = b"collection_description";
@@ -37,7 +38,7 @@ module MyNFT::first_NFT{
 
     // step two: mint NFT
     public entry fun mint(creator: &signer){
-        let token_constructor_ref = &token::create_named_token(
+        let token_constructor_ref = &token::create(
             creator,
             string::utf8(CollectionName),
             string::utf8(TokenDescription),
