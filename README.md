@@ -22,6 +22,9 @@
 
 [TOC]
 
+## 创建第一个 NFT
+
+打开文件: `create_first_nft.move`
 
 
 
