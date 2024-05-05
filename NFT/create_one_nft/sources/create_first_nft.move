@@ -16,15 +16,12 @@ module MyNFT::first_NFT{
     const CollectionName:vector<u8> = b"collection_name";
     const CollectionURI:vector<u8> = b"collection_uri";
     // token info
-    const TokenDescription:vector<u8> = b"token_dpescription";
+    const TokenDescription:vector<u8> = b"token_description";
     const TokenName:vector<u8> = b"token_name";
     const TokenURI:vector<u8> = b"token_uri";
     // token ref manager
     struct TokenRefsStore has key {
-        // mutator_ref: token::MutatorRef,
         burn_ref: token::BurnRef,
-        // extend_ref: object::ExtendRef,
-        // transfer_ref: option::Option<object::TransferRef>
     }
 
     // step one: create a collection
@@ -38,8 +35,6 @@ module MyNFT::first_NFT{
             option::some(royalty::create(1,1,signer::address_of(creator))),
             string::utf8(CollectionURI)
         );
-        // Create a mutable reference to the collection
-        // let collection_mutator_ref = collection::generate_mutator_ref(collection_construcor_ref);
     }
 
     // step two: mint NFT
@@ -52,27 +47,22 @@ module MyNFT::first_NFT{
             option::some(royalty::create(1,1,signer::address_of(creator))),
             string::utf8(TokenURI)
             );
-        // Create a mutable reference to the token
-        // let token_mutator_ref = token::generate_mutator_ref(token_constructor_ref);
         // Create a reference for burning an NFT
         let burn_ref = token::generate_burn_ref(token_constructor_ref);
-        // move_to(
-        //     creator,
-        //     TokenRefsStore{
-        //         burn_ref,
-        //     }
-        // );
+        move_to(
+            creator,
+            TokenRefsStore{
+                burn_ref,
+            }
+        );
     }
 
     // step three: burn NFT
-    public entry fun burn(token:Object<Token>) acquires TokenRefsStore {
+    public entry fun burn(creator:&signer) acquires TokenRefsStore {
         // let token_address  = object::object_address(&token);
         let TokenRefsStore{
-            // mutator_ref: _,
             burn_ref,
-            // extend_ref: _,
-            // transfer_ref: _
-        } = move_from<TokenRefsStore>(object::object_address(&token));
+        } = move_from<TokenRefsStore>(signer::address_of(creator));
         token::burn(burn_ref)
     }
 }
