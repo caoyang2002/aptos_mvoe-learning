@@ -4,9 +4,7 @@
 - [中文](#中文)
 
 - [中文自述文件](Docs/zh/README_zh.md)
-
 - [English Readme](Docs/en/README.md)
----
 
 ### English
 
@@ -16,20 +14,56 @@
 
 ### 中文
 
-// Your Chinese content here
+// 这里是中文内容
+
+
+---
 
 # aptos_mvoe-learning
 
-[TOC]
 
-> [!TIPS]
+目录: 
+<details>
+<summary>
+</summary>
+
+- [创建第一个-NFT](#一创建一个-nft) : 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
+
+-
+</details>
+
+
+> [!TIP]
 > 这个 NFT 是保存在 `合约账户` 下的
 
-# 一、步骤
+## 一、创建一个-NFT
+
 创建 NFT 后需要保存可变引用
 
+### 配置文件
+```toml
+[package]
+name = "create_one_nft"
+version = "1.0.0"
+authors = []
 
-## 1. 创建一个NFT
+[addresses]
+
+# 这里改为你自己的 init 出来的地址
+MyNFT = "0xfa1d368f0dbad70a35ebce24a13b6e8d77eb159311a54ffc0b920390dbd7349f"
+
+[dev-addresses]
+
+[dependencies.AptosTokenObjects]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "testnet"
+subdir = "aptos-move/framework/aptos-token-objects"
+
+[dev-dependencies]
+```
+
+
+
 ### 1.1 创建一个 collection
 
 
@@ -112,7 +146,6 @@ public entry fun mint(creator: &signer){
 ### 1.3 创建 burn函数
 
 ```move
-
 // step three: burn NFT  
 public entry fun burn(creator:&signer) acquires TokenRefsStore {  
     let TokenRefsStore{  
