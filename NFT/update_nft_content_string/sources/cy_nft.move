@@ -73,6 +73,7 @@ module cccy::ccyh_nft{
         let collection_mut_ref = collection::generate_mutator_ref(&collection_ref);
         // move collection to current signer
         move_to(&collection_signer,CollectionRefStore{mutator_ref:collection_mut_ref});
+
     }
 
     // mint
@@ -96,6 +97,7 @@ module cccy::ccyh_nft{
         );
         // get id from object constuctor
         // let id = token::index<Token>(object::object_from_constructor_ref(&token_ref));
+        //
         // mutable reference url, Add integers to url after converting them to characters
         // string::append(&mut url,string_utils::to_string(&id));
 

@@ -1,0 +1,17 @@
+[package]
+name = "create_nft_with_init_moudle_fun"
+version = "1.0.0"
+authors = []
+
+[addresses]
+
+MyNFT = "0xac245a2275a7b10fecc22da81abc58135c023e0c0a8a8fa12738ef9056651189"
+
+[dev-addresses]
+
+[dependencies.AptosTokenObjects]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-token-objects"
+
+[dev-dependencies]

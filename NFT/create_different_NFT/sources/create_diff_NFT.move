@@ -4,11 +4,11 @@ module MyNFT::diff{
     use std::string;
     use aptos_std::string_utils;
     use aptos_framework::object;
-    use aptos_framework::object::{ConstructorRef, Object};
+    use aptos_framework::object:: Object;
     use aptos_token_objects::collection;
     use aptos_token_objects::royalty;
     use aptos_token_objects::token;
-    use aptos_token_objects::token::{royalty, Token};
+    use aptos_token_objects::token::Token;
 
     // collection information
     const CollectionDescription:vector<u8> = b"collection_description";
@@ -38,7 +38,7 @@ module MyNFT::diff{
     public entry fun mint(creator:&signer){
         let token_constructor_ref = token::create_numbered_token(
             creator,
-            string::utf8(CollectionName),
+           string::utf8(CollectionName),
             string::utf8(TokenDescription),
             string::utf8(TokenPrefix),
             string::utf8(TokenSuffix),
