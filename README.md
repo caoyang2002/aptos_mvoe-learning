@@ -1,51 +1,37 @@
 <a name="readme-top"></a>
+# Aptos_move-Learning
+
+**简体中文** | [English](Docs/en/README.md) | [CHANGELOG](Docs/CHANGELOG.md)
+
+
 [TOC]
-## Language
 
-- [English](#english)
-- [中文](#中文)
-
-- [中文自述文件](Docs/zh/README_zh.md)
-- [English Readme](Docs/en/README.md)
-
-### English
-
-// Your English content here
-
-
-### 中文
-
-中文
-
----
-
-
-
-# 开始
-
-首先从 NFT 的创建展开, 逐步扩展到 aptos move 的语法, 以及特性
-
-## 目录
 <details>
-<summary>
-</summary>
 
-- [创建第一个 NFT](#一创建一个-nft) : 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
+<summary><kbd>打开</kbd></summary>
+
+- [创建第一个 NFT](#一创建一个-nft): 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
 
 - [创建一个将 burn 保存在对象里面的 NFT](#二创建一个将-burn-保存在-object-内的-nft): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和其他内容
 
-- [创建一个可以更改内容的 NFT](#三创建一个可以更改内容的-NFT): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和其他内容
+- [创建不同的 NFT](#三创建不同的-nft): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和设置不同的 NFT 视图
+
+- [使用 init_module 初始化模块](#四使用-init_moudle-初始化模块): 使用了 init_module, 以去掉 mint NFT 是的多余且容易误解的操作
+
+- [创建 NFT 时主动设置 NFT 的内容](#五创建-NFT-时主动设置-NFT-的内容): 可以在创建 NFT 时设置 NFT 的内容, 
 
 </details>
 
 
-> [!TIP]
-> 这个 NFT 是保存在 `合约账户` 下的
+# 介绍
 
+首先从 NFT 的创建展开, 逐步扩展到 aptos move 的语法, 以及特性
 
-# 参与
+# 未来
 
+em...
 
+# 加入
 
 
 # 一、创建一个 NFT
@@ -63,6 +49,7 @@
 创建 NFT 后需要保存可变引用
 
 ## 1. 配置文件
+
 ```toml
 [package]
 name = "create_one_nft"
@@ -896,7 +883,7 @@ module MyNFT::init_module_collection{
 
 
 
-# 五、在 NFT 中添加更多的内容
+# 五、创建 NFT 时主动设置 NFT 的内容
 
 > `#[event]` 给 view 用的,以监控变化
 
