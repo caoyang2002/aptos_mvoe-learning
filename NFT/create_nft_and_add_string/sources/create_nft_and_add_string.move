@@ -1,6 +1,5 @@
-module cccy::ccyh_nft{
+module MyNFT::ccyh_nft{
     use std::option;
-    use std::option::none;
     use std::signer;
     use std::string;
     use aptos_std::string_utils;
@@ -9,19 +8,26 @@ module cccy::ccyh_nft{
     use aptos_framework::event;
     use aptos_framework::object;
     use aptos_framework::object::Object;
-    use aptos_framework::resource_account;
     use aptos_token_objects::collection;
     use aptos_token_objects::token;
     use aptos_token_objects::token::Token;
 
 
-    const ResourceAccountSeed:vector<u8> = b"cccy"; // seed
-    const CollectionURI:vector<u8> = b"https://www.caoyang2002.top/usr/uploads/2023/08/4079902677.jpg"; // image NFT URL (mini)
-    const CollectionDescription:vector<u8> = b"a NFT image";
-    const CollectionName:vector<u8> = b"bird bulu";
-    const TokenURL:vector<u8> = b"https://www.caoyang2002.top/usr/uploads/2023/08/4079902677";
-    const TokenPrefix:vector<u8> = b"";
+
     const ERROR_NOWNER:u64 = 1;
+    // collection information
+    const CollectionDescription:vector<u8> = b"collection_description";
+    const CollectionName:vector<u8> = b"collection_name";
+    const CollectionURI:vector<u8> = b"https://caoyang2002.top/images/gclx/bird.png";
+
+    // token information
+    const TokenDescription:vector<u8> = b"token_description";
+    const TokenName:vector<u8> = b"token_name";
+    const TokenURI:vector<u8> = b"https://caoyang2002.top/images/gclx/";
+    const TokenPrefix:vector<u8> = b"number #";
+
+    // create a resource account seed
+    const ResourceAccountSeed:vector<u8> = b"seed";
 
     struct ResourceCap has key{ //not capability
         cap:SignerCapability
@@ -79,11 +85,11 @@ module cccy::ccyh_nft{
     entry public fun mint(sender: &signer,content: string::String) acquires ResourceCap {
         // borrow
         // not add '&' witbout the copy ability
-        let resource_cap = &borrow_global<ResourceCap>(account::create_resource_address(&@cccy,ResourceAccountSeed)).cap;
+        let resource_cap = &borrow_global<ResourceCap>(account::create_resource_address(&@MyNFT,ResourceAccountSeed)).cap;
         // create a rexource signer
         let resource_signer = &account::create_signer_with_capability(resource_cap);
         // u8 to utf8
-        let url = string::utf8(TokenURL);
+        let url = string::utf8(TokenURI);
         // create token ref
         let token_ref = token::create_numbered_token(
             resource_signer,
@@ -95,14 +101,15 @@ module cccy::ccyh_nft{
             string::utf8(b"")
         );
         // get id from object constuctor
-        // let id = token::index<Token>(object::object_from_constructor_ref(&token_ref));
+        let id = token::index<Token>(object::object_from_constructor_ref(&token_ref));
+        //
         // mutable reference url, Add integers to url after converting them to characters
-        // string::append(&mut url,string_utils::to_string(&id));
+        string::append(&mut url,string_utils::to_string(&id));
 
         //
 
         // add characters to url
-        string::append(&mut url, string::utf8(b".jpg"));
+        string::append(&mut url, string::utf8(b".png"));
         // gennerate token signer
         let token_signer = object::generate_signer(&token_ref);
         // mutable reference of token
@@ -176,8 +183,8 @@ module cccy::ccyh_nft{
     }
 
 
-    #[test(sender = @cccy)]
+    #[test(sender = @MyNFT)]
     public fun main(sender:&signer){
-        // init_module(sender)
+
     }
 }

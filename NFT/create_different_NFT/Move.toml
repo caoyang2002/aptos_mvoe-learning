@@ -1,17 +1,16 @@
 [package]
-name = "mynft"
+name = "create_different_NFT"
 version = "1.0.0"
 authors = []
 
 [addresses]
 
-cccy = "0x034b8818d43729747b571a5170d72fb777fa32a0040dacc4f43d72f80f9fcdd8"
+MyNFT = "0xcea377b6331c5a4a3e36ee7decacfd526e682874f7777ab41e3199c3ecfe55a7"
 
 [dev-addresses]
 
 [dependencies.AptosTokenObjects]
-#git = "https://github.com/aptos-labs/aptos-core.git"
-git = "https://gitee.com/WGB5445/aptos-core.git"
+git = "https://github.com/aptos-labs/aptos-core.git"
 rev = "mainnet"
 subdir = "aptos-move/framework/aptos-token-objects"
 
