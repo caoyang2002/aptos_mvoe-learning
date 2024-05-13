@@ -1,0 +1,17 @@
+[package]
+name = "two_number_sum"
+version = "1.0.0"
+authors = []
+
+[addresses]
+
+two_num = "0x467a3292c813553efee448eab0f45b8b2d582274801baffce6700145b43bfb7a"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]

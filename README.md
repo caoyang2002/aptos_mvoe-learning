@@ -6,9 +6,11 @@
 
 [TOC]
 
+目录
+
 <details>
 
-<summary><kbd>打开</kbd></summary>
+<summary><kbd>NFT</kbd></summary>
 
 - [创建第一个 NFT](#一创建一个-nft): 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
 
@@ -19,6 +21,15 @@
 - [使用 init_module 初始化模块](#四使用-init_moudle-初始化模块): 使用了 init_module, 以去掉 mint NFT 是的多余且容易误解的操作
 
 - [创建 NFT 时主动设置 NFT 的内容](#五创建-NFT-时主动设置-NFT-的内容): 可以在创建 NFT 时设置 NFT 的内容, 
+
+</details>
+
+
+<details>
+
+<summary><kbd>Move</kbd></summary>
+
+- [创建第一个 NFT](#一创建一个-nft): 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
 
 </details>
 
