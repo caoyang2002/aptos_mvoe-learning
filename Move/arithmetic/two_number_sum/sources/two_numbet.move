@@ -65,12 +65,13 @@ module two_num::sum_of_two_numebr{
 
     #[test]
     fun test(){
-        let vec = vector[2,7,11,15];
-        let target = 9;
+        let vec = vector[1,3,7,5,9,4,0,22,6,32,8];
+        let target = 30;
         let out_vec = vector[];
         let (a,b) =  sum_of_two(vec,target);
         push_back(&mut out_vec,a);
         push_back(&mut out_vec,b);
         debug::print(&mut out_vec);
+        // [debug] [ 7, 10 ]
     }
 }

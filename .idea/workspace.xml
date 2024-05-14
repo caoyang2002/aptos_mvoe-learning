@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bec8baed-34ac-43bf-922a-1f7398030828" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Move/arithmetic/two_number_sum/Move.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Move/arithmetic/two_number_sum/sources/two_numbet.move" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Move/arithmetic/sum_of_two_numbers_with_smart_table/Move.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Move/arithmetic/sum_of_two_numbers_with_smart_table/sources/hornor.move" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/zh/README_zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/zh/README_zh.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Move/arithmetic/two_number_sum/sources/two_numbet.move" beforeDir="false" afterPath="$PROJECT_DIR$/Move/arithmetic/two_number_sum/sources/two_numbet.move" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,24 +53,29 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Aptos.Test sum_of_two_numebr (2)">
-    <configuration name="Test sum_of_two_numebr (1)" type="AptosCommandConfiguration" factoryName="AnyCommand" temporary="true">
-      <option name="command" value="move test --filter sum_of_two_numebr" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$/Move/arithmetic/two_number_sum" />
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Move/arithmetic" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Aptos.Test hornor (1)">
+    <configuration name="Test hornor (1)" type="AptosCommandConfiguration" factoryName="AnyCommand" temporary="true">
+      <option name="command" value="move test --filter hornor" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/Move/hornor_O-n" />
+      <envs>
+        <env name="APTOS_DISABLE_TELEMETRY" value="true" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="Test hornor" type="AptosCommandConfiguration" factoryName="AnyCommand" temporary="true">
+      <option name="command" value="move test --filter hornor" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/Move/hornor_O-n" />
       <envs>
         <env name="APTOS_DISABLE_TELEMETRY" value="true" />
       </envs>
       <method v="2" />
     </configuration>
     <configuration name="Test sum_of_two_numebr (2)" type="AptosCommandConfiguration" factoryName="AnyCommand" temporary="true">
-      <option name="command" value="move test --filter sum_of_two_numebr" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$/Move/arithmetic/two_number_sum" />
-      <envs>
-        <env name="APTOS_DISABLE_TELEMETRY" value="true" />
-      </envs>
-      <method v="2" />
-    </configuration>
-    <configuration name="Test sum_of_two_numebr" type="AptosCommandConfiguration" factoryName="AnyCommand" temporary="true">
       <option name="command" value="move test --filter sum_of_two_numebr" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/Move/arithmetic/two_number_sum" />
       <envs>
@@ -98,11 +101,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Aptos.Test hornor (1)" />
+        <item itemvalue="Aptos.Test hornor" />
         <item itemvalue="Aptos.Test sum_of_two_numebr (2)" />
         <item itemvalue="Aptos.Test sum_of_two_numebr::test (3)" />
         <item itemvalue="Aptos.Test sum_of_two_numebr::test (2)" />
-        <item itemvalue="Aptos.Test sum_of_two_numebr (1)" />
-        <item itemvalue="Aptos.Test sum_of_two_numebr" />
       </list>
     </recent_temporary>
   </component>
@@ -119,7 +122,7 @@
       <workItem from="1714847580148" duration="4553000" />
       <workItem from="1715159751744" duration="642000" />
       <workItem from="1715464604808" duration="2410000" />
-      <workItem from="1715489840738" duration="14814000" />
+      <workItem from="1715489840738" duration="30569000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,15 @@
+[package]
+name = "hornor"
+version = "1.0.0"
+authors = []
+
+[addresses]
+hornor = "0x2aebd3d4b183850deb3a3bd7a3ce8798dd58ea6127c4646ff5f53e767b0a1da7"
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]
