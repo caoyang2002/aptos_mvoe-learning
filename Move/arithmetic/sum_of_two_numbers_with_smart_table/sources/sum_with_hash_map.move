@@ -1,4 +1,4 @@
-module 0x43::hornor{
+module 0x43::sum_with_hash_map {
     use std::string;
     use std::vector;
     use aptos_std::debug;

@@ -1,10 +1,10 @@
 [package]
-name = "hornor"
+name = "linked_list"
 version = "1.0.0"
 authors = []
 
 [addresses]
-name = "0x2aebd3d4b183850deb3a3bd7a3ce8798dd58ea6127c4646ff5f53e767b0a1da7"
+
 [dev-addresses]
 
 [dependencies.AptosFramework]
