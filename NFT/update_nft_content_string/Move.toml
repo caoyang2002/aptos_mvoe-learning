@@ -1,0 +1,17 @@
+[package]
+name = "create_one_nft_with_an_object"
+version = "1.0.0"
+authors = []
+
+[addresses]
+
+MyNFT = "0xc70dccea7751cb2e1ba210918eda303249b634761e90b1576f63f44d6b34de6f"
+
+[dev-addresses]
+
+[dependencies.AptosTokenObjects]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "testnet"
+subdir = "aptos-move/framework/aptos-token-objects"
+
+[dev-dependencies]
