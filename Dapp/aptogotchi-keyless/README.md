@@ -1,3 +1,6 @@
+> [!TIP]
+> 一个官方的案例
+
 # Aptogotchi（集成无密钥账户）
 
 Aptogotchi 是一个简单有趣的全栈、端到端的去中心化应用（dApp），展示了如何使用 Move 语言构建 dApp 的基础知识。
