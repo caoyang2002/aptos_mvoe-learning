@@ -12,15 +12,15 @@
 
 <summary><kbd>NFT</kbd></summary>
 
-- [创建第一个 NFT](#一创建一个-nft): 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
+- [创建第一个 NFT](./NFT/create_one_nft/): 一个简单功能的 NFT mnt 合约, 一次只能创建一个, 并且不能重复创建, 没有错误处理
 
-- [创建一个将 burn 保存在对象里面的 NFT](#二创建一个将-burn-保存在-object-内的-nft): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和其他内容
+- [创建一个将 burn 保存在对象里面的 NFT](./NFT/create_one_nft_with_an_object/): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和其他内容
 
-- [创建不同的 NFT](#三创建不同的-nft): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和设置不同的 NFT 视图
+- [创建不同的 NFT](./NFT/create_different_NFT/): 这是上一个版本的优化版本, 创建了一个 object, 用于存储引用和设置不同的 NFT 视图
 
-- [使用 init_module 初始化模块](#四使用-init_moudle-初始化模块): 使用了 init_module, 以去掉 mint NFT 是的多余且容易误解的操作
+- [使用 init_module 初始化模块](./NFT/create_nft_with_init_moudle_function/): 使用了 init_module, 以去掉 mint NFT 是的多余且容易误解的操作
 
-- [创建 NFT 时主动设置 NFT 的内容](#五创建-NFT-时主动设置-NFT-的内容): 可以在创建 NFT 时设置 NFT 的内容,
+- [创建 NFT 时主动设置 NFT 的内容](./NFT/create_nft_and_add_string/): 可以在创建 NFT 时设置 NFT 的内容,
 
 </details>
 
@@ -31,7 +31,6 @@
 - [基础](./Move/): Move 基础语法
 
 - [语法特性](./Move/language_feature): Move 语法特性
-
 
 </details>
 
@@ -45,9 +44,8 @@ em...
 
 # 加入
 
-
 > [!NOTE]
-> GitHub 的md笔记。
+> GitHub 的 md 笔记。
 
 > [!TIP]
 > 提供更好或更容易做事的有益建议。
