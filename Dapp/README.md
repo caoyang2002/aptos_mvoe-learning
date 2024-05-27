@@ -10,9 +10,9 @@
 
 <details>
 
-<summary><kbd>NFT</kbd></summary>
+<summary><kbd>Dapp</kbd></summary>
 
-- [无密钥账户-官方示例](./aptogotchi-keyless/): 5️ 无密钥账户官方示例
+- [无密钥账户-官方示例](./aptogotchi-keyless/): 无密钥账户官方示例
 
 - [无密钥账户-最小化实现](./keyless_example_mini/): 无密钥账户最小化实现
 
