@@ -700,15 +700,12 @@ export const useKeylessAccount = () => {
 }
 
 ```
-
 </details>
 
 ###### `src/hooks`
 
+<details>
 <summary>useEphemeralKeyPair.ts</summary>
-
-`app/hooks/useEphemeralKeyPair.ts`
-
 ```tsx
 import { EphemeralKeyPair } from '@aptos-labs/ts-sdk';
 
