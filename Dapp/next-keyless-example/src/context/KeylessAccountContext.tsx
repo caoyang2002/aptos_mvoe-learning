@@ -34,6 +34,7 @@ export const KeylessAccountProvider: React.FC<{
 // useKeylessAccount 是一个自定义的 React 钩子，用于在组件中获取 keyless 账户信息。
 export const useKeylessAccount = () => {
   const context = useContext(KeylessAccountContext)
+  console.log('content', context)
   if (!context) {
     throw new Error(
       'useKeylessAccount must be used within a KeylessAccountProvider'
