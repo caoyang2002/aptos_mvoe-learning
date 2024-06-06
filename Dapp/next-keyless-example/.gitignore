@@ -1,26 +1,20 @@
-.idea
-**/build/
-**/.aptos/
-**/node_modules
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-.idea
-node_modules
-out
-.pnp
+/node_modules
+/.pnp
 .pnp.js
+.yarn/install-state.gz
 
 # testing
-coverage
+/coverage
 
 # next.js
-.next/
-out/
-frontend/.next
+/.next/
+/out/
 
 # production
-build
+/build
 
 # misc
 .DS_Store
@@ -33,7 +27,6 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env
 
 # vercel
 .vercel
@@ -41,9 +34,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# aptos
-.aptos
-**/move/build
-
-.env

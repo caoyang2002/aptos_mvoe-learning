@@ -1,23 +1,23 @@
 ```yaml
-original: "https://github.com/aptos-labs/create-aptos-dapp#"
+original: 'https://github.com/aptos-labs/create-aptos-dapp#'
 ```
 
-# 开始
+# 运行本项目
 
-```bash
-npx create-aptos-dapp
+```
+pnpm start
 ```
 
-# 创建 Aptos Dapp
+## 创建 Aptos Dapp
 
 `create-aptos-dapp` 为 dapp 开发人员提供了一个启动包，以便在 Aptos 网络上轻松引导 dapp 的创建。
 
 > [!NOTE]
-> 无需克隆：在终端运行 npx create-aptos-dapp 即可开始
+> 无需克隆：在终端运行 `npx create-aptos-dapp` 即可开始
 
 ## 快速开始
 
-要创建 Aptos dapp，请打开终端，cd 进入您想要创建 dapp 的目录，然后运行以下命令：
+要创建 Aptos dapp，请打开终端，cd 进入您想要创建 `dapp` 的目录，然后运行以下命令：
 
 ```bash
 npx create-aptos-dapp
