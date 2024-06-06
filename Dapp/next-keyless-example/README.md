@@ -226,7 +226,7 @@ app
 
 #### `src`
 
-##### `app`
+##### `src/app`
 
 <details>
 <summary>page.tsx</summary>
@@ -315,45 +315,342 @@ export default function RootLayout({ children }: PropsWithChildren) {
     </html>
   )
 }
-
-
 ```
 </details>
 
+
+###### `src/app/home`
+
+
 <details>
-<summary>KeylessAccountContext.tsx</summary>
+<summary>Body.tsx</summary>
 
 ```tsx
+"use client";
 
+import { useKeylessAccount } from "@/context/KeylessAccountContext";
+import { Connected } from "./Connected";
+import { NotConnected } from "./NotConnected";
 
+export function Body() {
+  const { keylessAccount } = useKeylessAccount();
 
+  if (keylessAccount) return <Connected />;
+
+  return <NotConnected />;
+}
 ```
 </details>
 
 <details>
-<summary>KeylessAccountContext.tsx</summary>
+<summary>Connected.tsx</summary>
 
 ```tsx
+'use client'
 
+import { useEffect, useCallback, useState } from 'react'
+import { getAptosClient } from '@/utils/aptosClient'
+import { useKeylessAccount } from '@/context/KeylessAccountContext'
 
+const aptosClient = getAptosClient()
 
+export function Connected() {
+  const { keylessAccount } = useKeylessAccount()
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [progress, setProgress] = useState<number>(0)
+
+  useEffect(() => {
+    if (!keylessAccount?.accountAddress) return
+  }, [keylessAccount?.accountAddress])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((currentProgress) => {
+        if (currentProgress >= 100) {
+          clearInterval(interval)
+          return 100
+        }
+        return currentProgress + 1
+      })
+    }, 25)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="flex flex-col gap-3 p-3 justify-center items-center">
+      <div className="nes-container with-title">
+        <p className="title">Loading...</p>
+        <progress
+          className="nes-progress is-primary"
+          value={progress}
+          max="100"
+        ></progress>
+      </div>
+    </div>
+  )
+}
 ```
 </details>
 
 <details>
-<summary>KeylessAccountContext.tsx</summary>
+<summary>NotConnected.tsx</summary>
 
 ```tsx
+'use client'
+
+import React, { useState } from 'react'
+
+export function NotConnected() {
+  return (
+    <div className="flex flex-col gap-6 p-6">
+      <div className="nes-container is-dark with-title text-sm sm:text-base">
+        <p className="title">Welcome</p>
+        <p>Welcome to Aptogotchi!</p>
+      </div>
+    </div>
+  )
+}
+```
+</details>
+
+###### `src/app/callback`
+
+<details>
+<summary>Page.tsx</summary>
+
+```tsx
+'use client' // 确保以下代码只在客户端执行
+import { jwtDecode } from 'jwt-decode'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { getLocalEphemeralKeyPair } from '@/hooks/useEphemeralKeyPair'
+import { getAptosClient } from '@/utils/aptosClient'
+import { useKeylessAccount } from '@/context/KeylessAccountContext'
+import { EphemeralKeyPair, Account } from '@aptos-labs/ts-sdk'
+import { KeylessAccountProvider } from '../../context/KeylessAccountContext'
+
+const parseJWTFromURL = (url: string): string | null => {
+  const urlObject = new URL(url)
+  const fragment = urlObject.hash.substring(1)
+  const params = new URLSearchParams(fragment)
+  console.log('id_token: ', params.get('id_token'))
+  return params.get('id_token')
+}
+
+const CallbackPage = () => {
+  const { setKeylessAccount } = useKeylessAccount()
+  const { push } = useRouter()
+  const [progress, setProgress] = useState<number>(0)
+  const [hasError, setHasError] = useState<boolean>(false)
+
+  useEffect(() => {
+    // 仅在客户端执行
+    async function deriveAccount() {
+      const jwt = parseJWTFromURL(window.location.href)
+      if (!jwt) {
+        setHasError(true)
+        setProgress(100)
+        console.log('No JWT found in URL. Please try logging in again.')
+        return
+      }
+      const payload = jwtDecode<{ nonce: string }>(jwt)
+      const jwtNonce = payload.nonce
+      const ephemeralKeyPair = getLocalEphemeralKeyPair(jwtNonce)
+
+      if (!ephemeralKeyPair) {
+        setHasError(true)
+        setProgress(100)
+        console.log(
+          'No ephemeral key pair found for the given nonce. Please try logging in again.'
+        )
+        return
+      }
+      await createKeylessAccount(jwt, ephemeralKeyPair)
+
+      setProgress(100)
+      push('/')
+    }
+    deriveAccount()
+  }, [])
+
+  const createKeylessAccount = async (
+    jwt: string,
+    ephemeralKeyPair: EphemeralKeyPair
+  ) => {
+    const aptosClient = getAptosClient()
+    const keylessAccount = await aptosClient.deriveKeylessAccount({
+      jwt,
+      ephemeralKeyPair,
+    })
+    console.log('Keyless Account: ', keylessAccount.accountAddress.toString())
+    setKeylessAccount(keylessAccount)
+  }
+
+  return (
+    <KeylessAccountProvider>
+      <div className="flex items-center justify-center h-screen w-screen">
+        <div className="relative flex justify-center items-center border rounded-lg px-8 py-2 shadow-sm cursor-not-allowed tracking-wider">
+          <span className="absolute flex h-3 w-3 -top-1 -right-1">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          </span>
+          Redirecting...
+        </div>
+      </div>
+    </KeylessAccountProvider>
+  )
+}
+
+export default CallbackPage
+```
+</details>
 
 
+###### `compnents`
 
+<details>
+<summary>GoogleLogo.tsx</summary>
+
+```tsx
+function GoogleLogo() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mr-2 h-5 w-5"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M23.54 12.7613C23.54 11.9459 23.4668 11.1618 23.3309 10.4091H12.5V14.8575H18.6891C18.4225 16.295 17.6123 17.5129 16.3943 18.3284V21.2138H20.1109C22.2855 19.2118 23.54 16.2636 23.54 12.7613Z"
+        fill="#4285F4"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.4995 23.9998C15.6045 23.9998 18.2077 22.97 20.1104 21.2137L16.3938 18.3282C15.364 19.0182 14.0467 19.4259 12.4995 19.4259C9.50425 19.4259 6.96902 17.403 6.0647 14.6848H2.22266V17.6644C4.11493 21.4228 8.00402 23.9998 12.4995 23.9998Z"
+        fill="#34A853"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6.06523 14.6851C5.83523 13.9951 5.70455 13.2581 5.70455 12.5001C5.70455 11.7422 5.83523 11.0051 6.06523 10.3151V7.33557H2.22318C1.44432 8.88807 1 10.6444 1 12.5001C1 14.3558 1.44432 16.1122 2.22318 17.6647L6.06523 14.6851Z"
+        fill="#FBBC05"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.4995 5.57386C14.1879 5.57386 15.7038 6.15409 16.8956 7.29364L20.194 3.99523C18.2024 2.13955 15.5992 1 12.4995 1C8.00402 1 4.11493 3.57705 2.22266 7.33545L6.0647 10.315C6.96902 7.59682 9.50425 5.57386 12.4995 5.57386Z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
+
+export default GoogleLogo;
 ```
 </details>
 
 <details>
-<summary>KeylessAccountContext.tsx</summary>
+<summary>ClientOnly.tsx</summary>
 
-`app/context/KeylessAccountContext.tsx`
+```tsx
+"use client";
+
+import { PropsWithChildren, useEffect, useState } from "react";
+
+/**
+ * To fix Next.js issues with mismatching nonce (client-side) and nonce (server-side) errors.
+ *
+ * Prevents hydration mismatches by only rendering children on the client. This is different
+ * from the 'use client' directive because it prevents the child from being pre-rendered on the
+ * server at all.
+ */
+function ClientOnly({ children }: PropsWithChildren) {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+}
+
+export default ClientOnly;
+```
+</details>
+
+###### `src/components/WalletButtons`
+
+<details>
+<summary>index.tsx</summary>
+
+```tsx
+'use client'
+
+import GoogleLogo from '../GoogleLogo'
+import useEphemeralKeyPair from '@/hooks/useEphemeralKeyPair'
+
+//-------------------------------------
+const buttonStyles =
+  'nes-btn flex items-center justify-center md:gap-4 py-2 flex-nowrap whitespace-nowrap'
+
+export default function WalletButtons() {
+  const ephemeralKeyPair = useEphemeralKeyPair()
+  console.log('ephemeralKeyPair-nonce is : ', ephemeralKeyPair.nonce)
+
+  const redirectUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
+
+  const searchParams = new URLSearchParams({
+    // 请替换为您的客户端ID
+    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+    // redirect_uri 必须在Google开发者控制台中注册。此回调页面解析URL片段中的id_token，并将其与临时密钥对结合以派生无密钥账户。
+    redirect_uri:
+      typeof window !== 'undefined'
+        ? `${window.location.origin}/callback`
+        : (process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000'
+            : process.env.NEXT_PUBLIC_VERCEL_URL) + '/callback',
+    // 这使用了 OpenID Connect 隐式流返回 id_token。这对于单页应用(SPA)是推荐的，因为它不需要后端服务器。
+    response_type: 'id_token',
+    scope: 'openid email profile',
+    nonce: ephemeralKeyPair.nonce,
+  })
+
+  redirectUrl.search = searchParams.toString()
+  console.log('redirectUrl is : ', redirectUrl.search)
+
+  return (
+    <>
+      <div className="flex items-center justify-center m-auto sm:m-0 sm:px-4">
+        <a href={redirectUrl.toString()} className="hover:no-underline">
+          <button className={buttonStyles}>
+            <GoogleLogo />
+
+            <p>Sign in with Google</p>
+          </button>
+        </a>
+      </div>
+    </>
+  )
+}
+```
+</details>
+
+###### `src/context`
+
+<details>
+<summary>KeylessAccountContext.tsx</summary>
 
 ```tsx
 
@@ -406,11 +703,8 @@ export const useKeylessAccount = () => {
 
 </details>
 
+###### `src/hooks`
 
-
-
-
-<details>
 <summary>useEphemeralKeyPair.ts</summary>
 
 `app/hooks/useEphemeralKeyPair.ts`
@@ -559,13 +853,10 @@ export default function useEphemeralKeyPair() {
 </details>
 
 
+###### `src/utils`
 
-
-
-
-
-### aptosClient.tsx
-
+<details>
+<summary>aptosClient.tsx</summary>
 ```tsx
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
  
@@ -574,6 +865,5 @@ export function getAptosClient() {
   const config = new AptosConfig({ network: Network.TESTNET });
   return new Aptos(config);
 }
-
 ```
-
+</details>
