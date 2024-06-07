@@ -2,16 +2,12 @@
 
 ![image-20240607154119501](https://mielgo-markdown.oss-cn-chengdu.aliyuncs.com/image-20240607154119501.png)
 
-
-
 # 运行
 
 ```bash
 pnpm i
 pnpm dev
 ```
-
-
 
 # 从零开始构建
 
@@ -26,7 +22,6 @@ pnpm install @aptos-labs/ts-sdk@zeta
 pnpm i jwt-decode
 ```
 
-
 ## 目的
 
 ![keyless](https://mielgo-markdown.oss-cn-chengdu.aliyuncs.com/image-20240607075603292.png)
@@ -39,10 +34,6 @@ pnpm i jwt-decode
 >
 > 3. 安装 SDK 和工具配置
 
-
-
-
-
 # 一、准备环境
 
 包括 `Google` 的配置和`前端框架` 配置
@@ -53,9 +44,8 @@ pnpm i jwt-decode
 
 目前只支持 Google。Aptos 将在以后支持其他的 OIDC 提供商（例如苹果、Kakaotalk、微软等）。
 
-
-| 身份提供者 | 认证URL                                                      |
-| ---------- | ------------------------------------------------------------ |
+| 身份提供者 | 认证 URL                                                                                                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Google     | `https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=$%7BCLIENT_ID%7D&redirect_uri=$%7BREDIRECT_URI%7D&response_type=id_token&scope=openid%20email&nonce=$%7BNONCE%7D` |
 
 隐式流程（无授权码交换）是首选的身份验证方法。下面的集成步骤假定使用隐式流程。
@@ -67,35 +57,34 @@ pnpm i jwt-decode
 注册 Google 云账户（如果您还没有）
 
 1. 创建一个新项目或选择现有项目
-    - 上方的`下拉选择器`中`创建项目` -> 在`左侧菜单`中选择 `API 和服务` -> `凭据` -> 上方`创建凭据` -> `OAuth 客户端 ID`  -> `配置同意屏幕` -> `外部` -> `创建` -> `发布应用` -> `提交验证`
-
+   - 上方的`下拉选择器`中`创建项目` -> 在`左侧菜单`中选择 `API 和服务` -> `凭据` -> 上方`创建凭据` -> `OAuth 客户端 ID` -> `配置同意屏幕` -> `外部` -> `创建` -> `发布应用` -> `提交验证`
 
 <iframe width="800" height="450" src="https://learn.aptoslabs.com/videos/google_api_console.mov" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 2. 转到[凭据](https://console.developers.google.com/apis/credentials)页面。
-    - `创建凭据` -> `创建 OAuth 客户端 ID`
 
-3. 如果之前没有设置过OAuth同意屏幕，您可能需要进行设置。
-    - 这是您将为应用程序配置一些应用信息以及应用程序的作用域和权限的地方。
+   - `创建凭据` -> `创建 OAuth 客户端 ID`
+
+3. 如果之前没有设置过 OAuth 同意屏幕，您可能需要进行设置。
+   - 这是您将为应用程序配置一些应用信息以及应用程序的作用域和权限的地方。
 
 <iframe width="800" height="450" src="https://learn.aptoslabs.com/videos/credentials_to_consent_screen.mov" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 4. 选择或创建一个新的“OAuth 2.0 Client ID”。
 
-5. 配置授权来源（您的dApp来源）。
+5. 配置授权来源（您的 dApp 来源）。
 
-    - 这可能是 `http://localhost:3000` 用于本地开发。
-    - 确保在部署应用程序后更新这些来源。
+   - 这可能是 `http://localhost:3000` 用于本地开发。
+   - 确保在部署应用程序后更新这些来源。
 
-6. 配置重定向URI（在身份验证后接收授权码和/或 `id_token` 的回调处理程序）。
-    - 例如： `http://localhost:3000/callback` 用于本地开发。
+6. 配置重定向 URI（在身份验证后接收授权码和/或 `id_token` 的回调处理程序）。
+
+   - 例如： `http://localhost:3000/callback` 用于本地开发。
 
 7. 获取您的应用程序的 `client_id`。
-    - 将其保存在您的 `.env` 变量或常量文件中。
+   - 将其保存在您的 `.env` 变量或常量文件中。
 
 <iframe width="800" height="450" src="https://learn.aptoslabs.com/videos/create_client_id.mov" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 
 > [!TIP]
 >
@@ -104,8 +93,6 @@ pnpm i jwt-decode
 > ```bash
 > 40604332144-aaa7a6a5a7a78s7sa8a8ag77aa6a6a.apps.googleusercontent.com
 > ```
-
-
 
 ## 2. 安装 Next.js 框架
 
@@ -141,24 +128,20 @@ cd <你的项目名>
 >
 > - 输出
 >
->     ```bash
->     pnpm dev  
->                                                                                 
->     > test-keyless-example-next@0.1.0 dev /Users/caoyang/Desktop/GitHub/aptos_mvoe-learning/Dapp/test/test-keyless-example-next
->     > next dev
->                                                                                 
->      ⚠ Port 3000 is in use, trying 3001 instead. # 我的 3000 端口已经被使用了，所以使用的是 3001 端口
->       ▲ Next.js 14.2.3
->       - Local:        http://localhost:3001 # 访问这儿显示的端口
->     ```
+>   ```bash
+>   pnpm dev
+>
+>   > test-keyless-example-next@0.1.0 dev /Users/caoyang/Desktop/GitHub/aptos_mvoe-learning/Dapp/test/test-keyless-example-next
+>   > next dev
+>
+>    ⚠ Port 3000 is in use, trying 3001 instead. # 我的 3000 端口已经被使用了，所以使用的是 3001 端口
+>     ▲ Next.js 14.2.3
+>     - Local:        http://localhost:3001 # 访问这儿显示的端口
+>   ```
 >
 > <p style="color:green">你应该可以看到 NEXT.js 的主页</p>
 
-
-
 关于`src/app` 中每个文件的作用可以在[附录](#附录)中查看
-
-
 
 ## 3. 安装 Aptos SDK（Keyless 版本）
 
@@ -170,8 +153,6 @@ pnpm install @aptos-labs/ts-sdk@zeta
 >
 > 注意：一定是 `@zeta`，因为目前只有这个 Tag 下的包可以使用 `keyless`
 
-
-
 ## 4. 修改 `page.tsx` 页面
 
 ### 4.1 添加 Keyless “按钮”
@@ -181,24 +162,24 @@ pnpm install @aptos-labs/ts-sdk@zeta
 1. 找到 `Get started by editin`
 
 ```tsx
-# 注释原来的内容 
+# 注释原来的内容
 {/* <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">Get started by editing&nbsp;<code className="font-mono font-bold">src/app/page.tsx</code></p> */}
 ```
+
 - 改为（链接可以不写，这只是一个样例）
 
 ```tsx
-<a
-href="https://www.chyraw.com">
-使用 Google 账户登陆
-</a>
+<a href="https://www.chyraw.com">使用 Google 账户登陆</a>
 ```
+
 - 也可以添加一点样式（从原来的 `<p>` 里面复制）
 
 ```tsx
 <a
-href="https://www.chyraw.com"
-className="border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-使用 Google 账户登陆
+  href="https://www.chyraw.com"
+  className="border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30"
+>
+  使用 Google 账户登陆
 </a>
 ```
 
@@ -212,7 +193,7 @@ className="border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 bac
 
 考虑到登陆按钮是一个特定的功能，所以从页面里面拆分出去，作为一个独立的组件
 
-#### 4.2.1 创建  `src/components/WalletButtons/index.tsx` 文件
+#### 4.2.1 创建 `src/components/WalletButtons/index.tsx` 文件
 
 ```tsx
 'use client'
@@ -247,12 +228,6 @@ export default function Home() {
         ...
 ```
 
-
-
-
-
-
-
 ## 5. 创建 `src/hooks` 文件夹
 
 ### 5.1 创建 `src/hooks/useEphemeralKeyPair.tsx`
@@ -260,155 +235,143 @@ export default function Home() {
 创建一个新的 `useEphemeralKeyPair()` 钩子，将临时密钥对保存在本地存储中，以它的 `nonce` 作为键
 
 ```tsx
-import { EphemeralKeyPair } from '@aptos-labs/ts-sdk';
+import { EphemeralKeyPair } from '@aptos-labs/ts-sdk'
 
 export default function useEphemeralKeyPair() {
-  const ephemeralKeyPair = EphemeralKeyPair.generate();
-  storeEphemeralKeyPair(ephemeralKeyPair);
+  const ephemeralKeyPair = EphemeralKeyPair.generate()
+  storeEphemeralKeyPair(ephemeralKeyPair)
 
-  return ephemeralKeyPair;
+  return ephemeralKeyPair
 }
 ```
-
-
 
 #### code：`useEphemeralKeyPair` 完整代码
 
 ```tsx
-import { EphemeralKeyPair } from '@aptos-labs/ts-sdk';
-
+import { EphemeralKeyPair } from '@aptos-labs/ts-sdk'
 
 // 从 localStorage 中存储临时密钥对（nonce -> ephemeralKeyPair）
-export type StoredEphemeralKeyPairs = { [nonce: string]: EphemeralKeyPair };
+export type StoredEphemeralKeyPairs = { [nonce: string]: EphemeralKeyPair }
 
 // 从 localStorage 中检索具有给定 nonce 的临时密钥对。
 export const getLocalEphemeralKeyPair = (
-nonce: string,
+  nonce: string
 ): EphemeralKeyPair | null => {
-const keyPairs = getLocalEphemeralKeyPairs();
+  const keyPairs = getLocalEphemeralKeyPairs()
 
-// 获取具有给定 nonce 的账户（生成的临时密钥对的 nonce 可能与 localStorage 中的不匹配），因此我们需要在返回之前验证它（具体实现）。
-const ephemeralKeyPair = keyPairs[nonce];
-if (!ephemeralKeyPair) return null;
+  // 获取具有给定 nonce 的账户（生成的临时密钥对的 nonce 可能与 localStorage 中的不匹配），因此我们需要在返回之前验证它（具体实现）。
+  const ephemeralKeyPair = keyPairs[nonce]
+  if (!ephemeralKeyPair) return null
 
-// 如果账户有效，则返回它，否则从设备中移除并返回null
-return validateEphemeralKeyPair(nonce, ephemeralKeyPair);
-};
+  // 如果账户有效，则返回它，否则从设备中移除并返回null
+  return validateEphemeralKeyPair(nonce, ephemeralKeyPair)
+}
 
 // 验证具有给定nonce和过期时间戳的临时密钥对。
 // 如果nonce与临时密钥对生成的nonce不匹配，
 // 则从localStorage中移除临时密钥对。
 // 这是为了验证nonce算法是否相同（例如，如果nonce算法发生变化）
 export const validateEphemeralKeyPair = (
-nonce: string,
-ephemeralKeyPair: EphemeralKeyPair,
+  nonce: string,
+  ephemeralKeyPair: EphemeralKeyPair
 ): EphemeralKeyPair | null => {
-// 检查账户的 nonce 和过期时间戳，看它是否有效
-if (
-  nonce === ephemeralKeyPair.nonce &&
-  ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
-) {
-  return ephemeralKeyPair;
+  // 检查账户的 nonce 和过期时间戳，看它是否有效
+  if (
+    nonce === ephemeralKeyPair.nonce &&
+    ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
+  ) {
+    return ephemeralKeyPair
+  }
+  removeEphemeralKeyPair(nonce)
+  return null
 }
-removeEphemeralKeyPair(nonce);
-return null;
-};
 
 /**
  * 从 localStorage 中移除具有给定 nonce 的临时密钥对。
  */
- export const removeEphemeralKeyPair = (nonce: string): void => {
-   const keyPairs = getLocalEphemeralKeyPairs();
-   delete keyPairs[nonce];
-   localStorage.setItem(
-     "ephemeral-key-pairs",
-     encodeEphemeralKeyPairs(keyPairs),
-   );
- };
+export const removeEphemeralKeyPair = (nonce: string): void => {
+  const keyPairs = getLocalEphemeralKeyPairs()
+  delete keyPairs[nonce]
+  localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(keyPairs))
+}
 
+// 从 localStorage 中检索所有临时密钥对并解码它们。
+// 然后将新的临时密钥对存储在localStorage中，以nonce作为键。
+export const storeEphemeralKeyPair = (
+  ephemeralKeyPair: EphemeralKeyPair
+): void => {
+  // 从 localStorage 中检索当前的临时密钥对
+  const accounts = getLocalEphemeralKeyPairs()
 
- // 从 localStorage 中检索所有临时密钥对并解码它们。
- // 然后将新的临时密钥对存储在localStorage中，以nonce作为键。
- export const storeEphemeralKeyPair = (
-   ephemeralKeyPair: EphemeralKeyPair,
- ): void => {
-   // 从 localStorage 中检索当前的临时密钥对
-   const accounts = getLocalEphemeralKeyPairs();
+  // 将新的临时密钥对存储在 localStorage 中
+  accounts[ephemeralKeyPair.nonce] = ephemeralKeyPair
 
-   // 将新的临时密钥对存储在 localStorage 中
-   accounts[ephemeralKeyPair.nonce] = ephemeralKeyPair;
-
-   if (typeof localStorage === 'undefined') return;
-   localStorage.setItem(
-     "ephemeral-key-pairs",
-     encodeEphemeralKeyPairs(accounts),
-   );
- };
+  if (typeof localStorage === 'undefined') return
+  localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(accounts))
+}
 
 /**
  * 从 localStorage 中检索所有临时密钥对并解码它们。
  */
- export const getLocalEphemeralKeyPairs = (): StoredEphemeralKeyPairs => {
-   const rawEphemeralKeyPairs = typeof localStorage !== 'undefined' ? localStorage.getItem("ephemeral-key-pairs") : null;
-   try {
-     return rawEphemeralKeyPairs
-       ? decodeEphemeralKeyPairs(rawEphemeralKeyPairs)
-       : {};
-   } catch (error) {
-     // eslint-disable-next-line no-console
-     console.warn(
-       "Failed to decode ephemeral key pairs from localStorage",
-       error,
-     );
-     return {};
-   }
- };
+export const getLocalEphemeralKeyPairs = (): StoredEphemeralKeyPairs => {
+  const rawEphemeralKeyPairs =
+    typeof localStorage !== 'undefined'
+      ? localStorage.getItem('ephemeral-key-pairs')
+      : null
+  try {
+    return rawEphemeralKeyPairs
+      ? decodeEphemeralKeyPairs(rawEphemeralKeyPairs)
+      : {}
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'Failed to decode ephemeral key pairs from localStorage',
+      error
+    )
+    return {}
+  }
+}
 
+// 用于在 localStorage 中存储 EphemeralKeyPair 类的编码
+const EphemeralKeyPairEncoding = {
+  decode: (e: any) => EphemeralKeyPair.fromBytes(e.data),
+  encode: (e: EphemeralKeyPair) => ({
+    __type: 'EphemeralKeyPair',
+    data: e.bcsToBytes(),
+  }),
+}
 
- // 用于在 localStorage 中存储 EphemeralKeyPair 类的编码
- const EphemeralKeyPairEncoding = {
-   decode: (e: any) => EphemeralKeyPair.fromBytes(e.data),
-   encode: (e: EphemeralKeyPair) => ({ __type: 'EphemeralKeyPair', data: e.bcsToBytes() }),
- };
+// 将临时密钥对字符串化以存储在 localStorage 中
+export const encodeEphemeralKeyPairs = (
+  keyPairs: StoredEphemeralKeyPairs
+): string =>
+  JSON.stringify(keyPairs, (_, e) => {
+    if (typeof e === 'bigint') return { __type: 'bigint', value: e.toString() }
+    if (e instanceof Uint8Array)
+      return { __type: 'Uint8Array', value: Array.from(e) }
+    if (e instanceof EphemeralKeyPair) return EphemeralKeyPairEncoding.encode(e)
+    return e
+  })
 
-
-   // 将临时密钥对字符串化以存储在 localStorage 中
-   export const encodeEphemeralKeyPairs = (
-   keyPairs: StoredEphemeralKeyPairs,
-   ): string =>
-   JSON.stringify(keyPairs, (_, e) => {
-     if (typeof e === "bigint") return { __type: "bigint", value: e.toString() };
-     if (e instanceof Uint8Array)
-       return { __type: "Uint8Array", value: Array.from(e) };
-     if (e instanceof EphemeralKeyPair)
-       return EphemeralKeyPairEncoding.encode(e);
-     return e;
-   });
-
-
-   // 从字符串中解析临时密钥对
-   export const decodeEphemeralKeyPairs = (
-   encodedEphemeralKeyPairs: string,
-   ): StoredEphemeralKeyPairs =>
-   JSON.parse(encodedEphemeralKeyPairs, (_, e) => {
-     if (e && e.__type === "bigint") return BigInt(e.value);
-     if (e && e.__type === "Uint8Array") return new Uint8Array(e.value);
-     if (e && e.__type === "EphemeralKeyPair")
-       return EphemeralKeyPairEncoding.decode(e);
-     return e;
-   });
+// 从字符串中解析临时密钥对
+export const decodeEphemeralKeyPairs = (
+  encodedEphemeralKeyPairs: string
+): StoredEphemeralKeyPairs =>
+  JSON.parse(encodedEphemeralKeyPairs, (_, e) => {
+    if (e && e.__type === 'bigint') return BigInt(e.value)
+    if (e && e.__type === 'Uint8Array') return new Uint8Array(e.value)
+    if (e && e.__type === 'EphemeralKeyPair')
+      return EphemeralKeyPairEncoding.decode(e)
+    return e
+  })
 
 export default function useEphemeralKeyPair() {
-   const ephemeralKeyPair = EphemeralKeyPair.generate();
-   storeEphemeralKeyPair(ephemeralKeyPair);
+  const ephemeralKeyPair = EphemeralKeyPair.generate()
+  storeEphemeralKeyPair(ephemeralKeyPair)
 
-   return ephemeralKeyPair;
+  return ephemeralKeyPair
 }
 ```
-
-
-
-
 
 ### 5.2 在 `WalletButtons`组件中生成临时密钥对
 
@@ -417,11 +380,11 @@ export default function useEphemeralKeyPair() {
 ```tsx
 'use client'
 // 新增的
-import { useKeylessAccount } from "@/context/KeylessAccountContext";
+import { useKeylessAccount } from '@/context/KeylessAccountContext'
 // -----------------------
 export default function WalletButtons() {
   // 新增的
-  const ephemeralKeyPair = useEphemeralKeyPair();
+  const ephemeralKeyPair = useEphemeralKeyPair()
   // -----------------------------------
   return (
     <>
@@ -436,14 +399,12 @@ export default function WalletButtons() {
 }
 ```
 
-
-
 ### 5.3 设置 OAuth 流程
 
 `WalletButtons/index.tsx`
 
 ```tsx
-const redirectUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+const redirectUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
 const searchParams = new URLSearchParams({
   // 用您自己的客户端 ID 替换
   client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
@@ -454,11 +415,11 @@ const searchParams = new URLSearchParams({
   redirect_uri: `${window.location.origin}/callback`,
 
   //这使用 OpenID Connect 隐式流程返回 id_token。这被推荐用于 SPAs（单页应用程序），因为它不需要后端服务器。
-  response_type: "id_token",
-  scope: "openid email profile",
+  response_type: 'id_token',
+  scope: 'openid email profile',
   nonce: ephemeralKeyPair.nonce,
-});
-redirectUrl.search = searchParams.toString();
+})
+redirectUrl.search = searchParams.toString()
 ```
 
 当用户点击登录按钮时，将用户重定向到你刚刚创建的 `redirectUrl`。
@@ -466,9 +427,7 @@ redirectUrl.search = searchParams.toString();
 `WalletButtons/index.tsx`
 
 ```tsx
-<a href={redirectUrl.toString()}>  
-    使用 Google 账户登陆
-</a>
+<a href={redirectUrl.toString()}>使用 Google 账户登陆</a>
 ```
 
 #### code：`WalletButtons` 完整代码
@@ -521,8 +480,6 @@ export default function WalletButtons() {
 }
 ```
 
-
-
 ## 6. 创建回调页面 `src/app/callback/page.tsx`
 
 > 这里需要解析 `jwt`，所以要安装 `jwt-decode`
@@ -531,140 +488,125 @@ export default function WalletButtons() {
 > pnpm i jwt-decode
 > ```
 
-
-
 1. 用户完成登录流程后，将被重定向到前面设置的 `redirect_uri`
 
-    - JWT 将作为一个搜索参数在 URL 片段中设置，通过 `id_token` 作为键，即最终效果为 `id_token=xxxxxxxxxx`
+   - JWT 将作为一个搜索参数在 URL 片段中设置，通过 `id_token` 作为键，即最终效果为 `id_token=xxxxxxxxxx`
 
-    - 通过以下方式从窗口中提取 JWT：
+   - 通过以下方式从窗口中提取 JWT：
 
-        `callback/page.tsx`
+     `callback/page.tsx`
 
-        ```tsx
-        const parseJWTFromURL = (url: string): string | null => {
-          const urlObject = new URL(url);
-          const fragment = urlObject.hash.substring(1);
-          const params = new URLSearchParams(fragment);
-          return params.get('id_token');
-        };
-         
-        // window.location.href = https://.../callback#id_token=...
-        const jwt = parseJWTFromURL(window.location.href);
-        ```
+     ```tsx
+     const parseJWTFromURL = (url: string): string | null => {
+       const urlObject = new URL(url)
+       const fragment = urlObject.hash.substring(1)
+       const params = new URLSearchParams(fragment)
+       return params.get('id_token')
+     }
 
+     // window.location.href = https://.../callback#id_token=...
+     const jwt = parseJWTFromURL(window.location.href)
+     ```
 
 2. 解码 JWT 并从负载中提取 `nonce` 值
 
-    `callback/page.tsx`
+   `callback/page.tsx`
 
-    ```tsx
-    import { jwtDecode } from 'jwt-decode';
-     
-    const payload = jwtDecode<{ nonce: string }>(jwt);
-    const jwtNonce = payload.nonce;
-    ```
+   ```tsx
+   import { jwtDecode } from 'jwt-decode'
+
+   const payload = jwtDecode<{ nonce: string }>(jwt)
+   const jwtNonce = payload.nonce
+   ```
 
 3. 使用解码后的 nonce 获取 `EphemeralKeyPair`（在登录流程前存储）
 
-    `callback/page.tsx`
+   `callback/page.tsx`
 
-    ```tsx
-    const ephemeralKeyPair = getLocalEphemeralKeyPair(jwtNonce);
-    ```
+   ```tsx
+   const ephemeralKeyPair = getLocalEphemeralKeyPair(jwtNonce)
+   ```
 
 4. 获取本地临时密钥对的示例实现：
 
-    - 这包括临时密钥对的验证和移除
+   - 这包括临时密钥对的验证和移除
 
-    ```tsx
-    /**
-     * 从localStorage中检索给定 nonce 的临时密钥对。
-     */
-    export const getLocalEphemeralKeyPair = (
-      nonce: string,
-    ): EphemeralKeyPair | null => {
-      const keyPairs = getLocalEphemeralKeyPairs();
-     
-      // 使用给定 nonce 获取账户（生成的 nonce 可能与 localStorage 中的 nonce 不匹配）
-      // 因此，我们需要在返回之前验证它（特定于实现）。
-      const ephemeralKeyPair = keyPairs[nonce];
-      if (!ephemeralKeyPair) return null;
-     
-      // 如果账户有效，则返回它，否则从设备中移除并返回 null
-      return validateEphemeralKeyPair(nonce, ephemeralKeyPair);
-    };
-     
-    /**
-     * 使用给定的 nonce 和过期时间戳验证临时密钥对。如果 nonce 与临时密钥对生成的 nonce 不匹配，
-     * 则从 localStorage 中移除临时密钥对。这是为了验证 nonce 算法是否相同（例如，如果 nonce 算法发生了变化）。
-     */
-    export const validateEphemeralKeyPair = (
-      nonce: string,
-      ephemeralKeyPair: EphemeralKeyPair,
-    ): EphemeralKeyPair | null => {
-      // 检查账户的 nonce 和过期时间戳，看它是否有效
-      if (
-        nonce === ephemeralKeyPair.nonce &&
-        ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
-      ) {
-        return ephemeralKeyPair;
-      }
-      removeEphemeralKeyPair(nonce);
-      return null;
-    };
-     
-    /**
-     * 从localStorage中移除给定 nonce 的临时密钥对。
-     */
-    export const removeEphemeralKeyPair = (nonce: string): void => {
-      const keyPairs = getLocalEphemeralKeyPairs();
-      delete keyPairs[nonce];
-      localStorage.setItem(
-        "ephemeral-key-pairs",
-        encodeEphemeralKeyPairs(keyPairs),
-      );
-    };
-    ```
-    
-    
-    
-    
+   ```tsx
+   /**
+    * 从localStorage中检索给定 nonce 的临时密钥对。
+    */
+   export const getLocalEphemeralKeyPair = (
+     nonce: string
+   ): EphemeralKeyPair | null => {
+     const keyPairs = getLocalEphemeralKeyPairs()
 
+     // 使用给定 nonce 获取账户（生成的 nonce 可能与 localStorage 中的 nonce 不匹配）
+     // 因此，我们需要在返回之前验证它（特定于实现）。
+     const ephemeralKeyPair = keyPairs[nonce]
+     if (!ephemeralKeyPair) return null
 
+     // 如果账户有效，则返回它，否则从设备中移除并返回 null
+     return validateEphemeralKeyPair(nonce, ephemeralKeyPair)
+   }
 
+   /**
+    * 使用给定的 nonce 和过期时间戳验证临时密钥对。如果 nonce 与临时密钥对生成的 nonce 不匹配，
+    * 则从 localStorage 中移除临时密钥对。这是为了验证 nonce 算法是否相同（例如，如果 nonce 算法发生了变化）。
+    */
+   export const validateEphemeralKeyPair = (
+     nonce: string,
+     ephemeralKeyPair: EphemeralKeyPair
+   ): EphemeralKeyPair | null => {
+     // 检查账户的 nonce 和过期时间戳，看它是否有效
+     if (
+       nonce === ephemeralKeyPair.nonce &&
+       ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
+     ) {
+       return ephemeralKeyPair
+     }
+     removeEphemeralKeyPair(nonce)
+     return null
+   }
+
+   /**
+    * 从localStorage中移除给定 nonce 的临时密钥对。
+    */
+   export const removeEphemeralKeyPair = (nonce: string): void => {
+     const keyPairs = getLocalEphemeralKeyPairs()
+     delete keyPairs[nonce]
+     localStorage.setItem(
+       'ephemeral-key-pairs',
+       encodeEphemeralKeyPairs(keyPairs)
+     )
+   }
+   ```
 
 ## 7. 配置客户端
 
 `utils/aptosClient.ts`
 
 ```tsx
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
- 
+import { Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk'
+
 export function getAptosClient() {
   // 或者 Network.DEVNET（确保你的网络在应用程序中保持一致）
-  const config = new AptosConfig({ network: Network.TESTNET });
-  return new Aptos(config);
+  const config = new AptosConfig({ network: Network.TESTNET })
+  return new Aptos(config)
 }
 ```
-
-
 
 ## 8. 实例化无密钥账户
 
 `callback/page.tsx`
 
 ```tsx
-const aptosClient = getAptosClient();
- 
+const aptosClient = getAptosClient()
+
 const keylessAccount = await aptosClient.deriveKeylessAccount({
   jwt,
   ephemeralKeyPair,
-});
-
+})
 ```
-
-
 
 ### code：`callback/page.tsx` 完整代码
 
@@ -754,8 +696,6 @@ const CallbackPage = () => {
 export default CallbackPage
 ```
 
-
-
 ## 9. 使用 React Context
 
 `context/KeylessAccountContext.tsx`
@@ -807,7 +747,6 @@ export const useKeylessAccount = () => {
 }
 ```
 
-
 ## 10. 修改 `app/layout.tsx`
 
 ```tsx
@@ -840,9 +779,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     </html>
   )
 }
-
 ```
-
 
 ## 11. 在根目录创建环境变量文件`.env`
 
@@ -865,44 +802,42 @@ NEXT_PUBLIC_URL=http://localhost:3000
 
 因为没有获取到 `nonce`（`phemeralKeyPair` 为空），我们继续！
 
-
-
 ## 12. 创建 `ClientOnly.tsx` 文件
 
 > 为了解决因 `phemeralKeyPair` 为空，而提示再次登陆的问题
 
 ```tsx
-"use client";
+'use client'
 
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from 'react'
 
 // 为了修复 Next.js 中客户端和服务器端 nonce 不匹配的问题，
 // 我们采取了一种方法，只在客户端渲染子组件。
 // 这与“use client”指令不同，因为它完全阻止了子组件在服务器端的预渲染。
 // 这样可以防止 hydration 不匹配的问题。
 function ClientOnly({ children }: PropsWithChildren) {
-  const [hasMounted, setHasMounted] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false)
 
   useEffect(() => {
-    setHasMounted(true);
-  }, []);
+    setHasMounted(true)
+  }, [])
 
   if (!hasMounted) {
-    return null;
+    return null
   }
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>;
+  return <>{children}</>
 }
 
-export default ClientOnly;
+export default ClientOnly
 ```
 
-这段代码是一个React组件，名为`ClientOnly`，它使用了Next.js框架的特性。这个组件的目的是解决Next.js在服务器端渲染（SSR）和客户端渲染（CSR）过程中可能出现的hydration不匹配问题。hydration是Next.js在客户端将服务器端生成的HTML与React组件树进行匹配的过程。
+这段代码是一个 React 组件，名为`ClientOnly`，它使用了 Next.js 框架的特性。这个组件的目的是解决 Next.js 在服务器端渲染（SSR）和客户端渲染（CSR）过程中可能出现的 hydration 不匹配问题。hydration 是 Next.js 在客户端将服务器端生成的 HTML 与 React 组件树进行匹配的过程。
 
 组件的实现方式如下：
 
-1. 使用`useState`钩子创建一个状态变量`hasMounted`，初始值为`false`。这个状态用于跟踪组件是否已经挂载到DOM上。
+1. 使用`useState`钩子创建一个状态变量`hasMounted`，初始值为`false`。这个状态用于跟踪组件是否已经挂载到 DOM 上。
 
 2. 使用`useEffect`钩子来设置`hasMounted`状态为`true`。这个副作用函数在组件挂载时执行一次，没有依赖项数组`[]`，因此它只会在组件首次渲染时执行。
 
@@ -910,11 +845,9 @@ export default ClientOnly;
 
 4. 如果`hasMounted`为`true`，则渲染`children`。`children`是传递给`ClientOnly`组件的子组件或元素。
 
-这个组件的目的是确保只有在客户端渲染时，才会渲染其子组件。这样可以避免在服务器端渲染的HTML与客户端渲染的React组件树之间出现不匹配的情况，从而避免hydration错误。
+这个组件的目的是确保只有在客户端渲染时，才会渲染其子组件。这样可以避免在服务器端渲染的 HTML 与客户端渲染的 React 组件树之间出现不匹配的情况，从而避免 hydration 错误。
 
-`use client`指令是Next.js 12.2版本引入的，用于标记一个组件或文件为客户端专用，意味着该组件或文件中的代码只会在客户端执行，不会在服务器端执行。这个`ClientOnly`组件通过其逻辑实现了类似的功能，但没有使用`use client`指令，而是通过状态管理来控制渲染时机。
-
-
+`use client`指令是 Next.js 12.2 版本引入的，用于标记一个组件或文件为客户端专用，意味着该组件或文件中的代码只会在客户端执行，不会在服务器端执行。这个`ClientOnly`组件通过其逻辑实现了类似的功能，但没有使用`use client`指令，而是通过状态管理来控制渲染时机。
 
 ## 13. 导入 `ClientOnly` 更改到 `page.tsx`
 
@@ -936,8 +869,8 @@ export default function Home() {
 }
 ```
 
->[!TIP]
->现在我们已经完整实现了 keyless
+> [!TIP]
+> 现在我们已经完整实现了 keyless
 > 如果你愿意可以加一些其他的功能：
 > 由于我们目前还没有创建页面 —— `未登陆` 和 `已登陆` 的界面 —— 然后还需要做判断是否登陆，以显示不同的页面，我们开始吧！
 >
@@ -946,9 +879,6 @@ export default function Home() {
 > 先把 `src/app/page.tsx` 里面的文件移动到一个组件里面，用这个组件去判断当前的状态，然后返回给 `page.tsx` 不同的内容
 >
 > 由于 `登陆` 按钮的位置是固定的，所以需要单独提取出来
-> 
-
-
 
 ## 14. 美化一下
 
@@ -992,10 +922,10 @@ function GoogleLogo() {
         fill="#EA4335"
       />
     </svg>
-  );
+  )
 }
 
-export default GoogleLogo;
+export default GoogleLogo
 ```
 
 > 登陆和未登陆显示不同的内容
@@ -1163,6 +1093,7 @@ export default function Header() {
   )
 }
 ```
+
 > 底部
 
 `app/home/body/Footer.tsx`
@@ -1302,10 +1233,6 @@ app
 └── page.tsx # 页面组件，它代表了应用中的一个页面。在 Next.js 中，每个页面组件对应一个路由。页面组件可以包含自己的布局和样式，并且可以使用 Next.js 提供的路由和数据获取功能。
 ```
 
-
-
-
-
 # 2. 代码
 
 ### 文件夹结构
@@ -1340,10 +1267,10 @@ src
     └── aptosClient.tsx
 ```
 
-
 ### 代码
 
 #### `/`
+
 <details>
 <summary>.env</summary>
 
@@ -1351,8 +1278,8 @@ src
 NEXT_PUBLIC_GOOGLE_CLIENT_ID="40632423qe3hhhhhhhhhhhhhhhddddsshhhh44hhhhg90.apps.googleusercontent.com"
 NEXT_PUBLIC_URL=http://localhost:3000
 ```
-</details>
 
+</details>
 
 #### `src`
 
@@ -1376,6 +1303,7 @@ export default function Home() {
   )
 }
 ```
+
 </details>
 
 <details>
@@ -1410,13 +1338,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
     </html>
   )
 }
-
 ```
+
 </details>
 
-
 ###### `src/app/home`
-
 
 <details>
 <summary>Body.tsx</summary>
@@ -1436,6 +1362,7 @@ export function Body() {
   return <NotConnected />
 }
 ```
+
 </details>
 
 <details>
@@ -1524,6 +1451,7 @@ export function Connected() {
   )
 }
 ```
+
 </details>
 
 <details>
@@ -1547,6 +1475,7 @@ export function NotConnected() {
   )
 }
 ```
+
 </details>
 
 ####### `src/app/home/body`
@@ -1584,8 +1513,8 @@ export default function Header() {
   )
 }
 ```
-</details>
 
+</details>
 
 <details>
 <summary>Main.tsx</summary>
@@ -1607,10 +1536,9 @@ export default function Header() {
     </div>
   )
 }
-
 ```
-</details>
 
+</details>
 
 <details>
 <summary>Footer.tsx</summary>
@@ -1692,8 +1620,8 @@ export default function Footer() {
   )
 }
 ```
-</details>
 
+</details>
 
 ###### `src/app/callback`
 
@@ -1821,8 +1749,8 @@ function CallbackPage() {
 
 export default CallbackPage
 ```
-</details>
 
+</details>
 
 ###### `src/compnents`
 
@@ -1834,22 +1762,23 @@ export default CallbackPage
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 function ClientOnly({ children }: PropsWithChildren) {
-  const [hasMounted, setHasMounted] = useState(false)
+const [hasMounted, setHasMounted] = useState(false)
 
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
+useEffect(() => {
+setHasMounted(true)
+}, [])
 
-  if (!hasMounted) {
-    return null
-  }
+if (!hasMounted) {
+return null
+}
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>
+// eslint-disable-next-line react/jsx-no-useless-fragment
+return <>{children}</>
 }
 
 export default ClientOnly
-```
+
+````
 </details>
 
 
@@ -1896,9 +1825,9 @@ function GoogleLogo() {
 }
 
 export default GoogleLogo;
-```
-</details>
+````
 
+</details>
 
 ###### `src/components/WalletButtons/`
 
@@ -1963,8 +1892,8 @@ export default function WalletButtons() {
     </>
   )
 }
-
 ```
+
 </details>
 
 ###### `src/context/`
@@ -1978,21 +1907,20 @@ import React, { createContext, useContext, useState } from 'react'
 import { Account } from '@aptos-labs/ts-sdk'
 
 interface KeylessAccountContextType {
-  keylessAccount: Account | null 
-  setKeylessAccount: (account: Account | null) => void 
+  keylessAccount: Account | null
+  setKeylessAccount: (account: Account | null) => void
 }
 
 const KeylessAccountContext = createContext<
-  KeylessAccountContextType | undefined 
->(undefined) 
-
+  KeylessAccountContextType | undefined
+>(undefined)
 
 export const KeylessAccountProvider: React.FC<{
-  children: React.ReactNode 
+  children: React.ReactNode
 }> = ({ children }) => {
-  const [keylessAccount, setKeylessAccount] = useState<Account | null>(null) 
+  const [keylessAccount, setKeylessAccount] = useState<Account | null>(null)
   return (
-    <KeylessAccountContext.Provider 
+    <KeylessAccountContext.Provider
       value={{ keylessAccount, setKeylessAccount }}
     >
       {children}
@@ -2008,9 +1936,10 @@ export const useKeylessAccount = () => {
       'useKeylessAccount must be used within a KeylessAccountProvider'
     )
   }
-  return context 
+  return context
 }
 ```
+
 </details>
 
 ###### `src/hooks`
@@ -2022,112 +1951,112 @@ import { EphemeralKeyPair } from '@aptos-labs/ts-sdk'
 
 export type StoredEphemeralKeyPairs = { [nonce: string]: EphemeralKeyPair }
 
-
 export const getLocalEphemeralKeyPair = (
-  nonce: string
+nonce: string
 ): EphemeralKeyPair | null => {
-  const keyPairs = getLocalEphemeralKeyPairs()
-  console.log('keyPairs', keyPairs)
-  console.log('正在查找 nonce', nonce)
+const keyPairs = getLocalEphemeralKeyPairs()
+console.log('keyPairs', keyPairs)
+console.log('正在查找 nonce', nonce)
 
-  const ephemeralKeyPair = keyPairs[nonce]
-  console.log('ephemeralKeyPair', ephemeralKeyPair)
-  if (!ephemeralKeyPair) return null
+const ephemeralKeyPair = keyPairs[nonce]
+console.log('ephemeralKeyPair', ephemeralKeyPair)
+if (!ephemeralKeyPair) return null
 
-  return validateEphemeralKeyPair(nonce, ephemeralKeyPair)
+return validateEphemeralKeyPair(nonce, ephemeralKeyPair)
 }
 
 export const validateEphemeralKeyPair = (
-  nonce: string,
-  ephemeralKeyPair: EphemeralKeyPair
+nonce: string,
+ephemeralKeyPair: EphemeralKeyPair
 ): EphemeralKeyPair | null => {
 
-  if (
-    nonce === ephemeralKeyPair.nonce &&
-    ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
-  ) {
-    return ephemeralKeyPair
-  }
-  removeEphemeralKeyPair(nonce)
-  return null
+if (
+nonce === ephemeralKeyPair.nonce &&
+ephemeralKeyPair.expiryDateSecs > BigInt(Math.floor(Date.now() / 1000))
+) {
+return ephemeralKeyPair
+}
+removeEphemeralKeyPair(nonce)
+return null
 }
 
 export const removeEphemeralKeyPair = (nonce: string): void => {
-  const keyPairs = getLocalEphemeralKeyPairs()
-  delete keyPairs[nonce]
-  localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(keyPairs))
+const keyPairs = getLocalEphemeralKeyPairs()
+delete keyPairs[nonce]
+localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(keyPairs))
 }
 
 export const storeEphemeralKeyPair = (
-  ephemeralKeyPair: EphemeralKeyPair
+ephemeralKeyPair: EphemeralKeyPair
 ): void => {
-  // Retrieve the current ephemeral key pairs from localStorage
-  const accounts = getLocalEphemeralKeyPairs()
+// Retrieve the current ephemeral key pairs from localStorage
+const accounts = getLocalEphemeralKeyPairs()
 
-  // Store the new ephemeral key pair in localStorage
-  accounts[ephemeralKeyPair.nonce] = ephemeralKeyPair
-  console.log('正在保存 ephemeral key pairs no', ephemeralKeyPair.nonce)
+// Store the new ephemeral key pair in localStorage
+accounts[ephemeralKeyPair.nonce] = ephemeralKeyPair
+console.log('正在保存 ephemeral key pairs no', ephemeralKeyPair.nonce)
 
-  if (typeof localStorage === 'undefined') return
-  localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(accounts))
+if (typeof localStorage === 'undefined') return
+localStorage.setItem('ephemeral-key-pairs', encodeEphemeralKeyPairs(accounts))
 }
 
 export const getLocalEphemeralKeyPairs = (): StoredEphemeralKeyPairs => {
-  const rawEphemeralKeyPairs =
-    typeof localStorage !== 'undefined'
-      ? localStorage.getItem('ephemeral-key-pairs')
-      : null
-  try {
-    return rawEphemeralKeyPairs
-      ? decodeEphemeralKeyPairs(rawEphemeralKeyPairs)
-      : {}
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      'Failed to decode ephemeral key pairs from localStorage',
-      error
-    )
-    return {}
-  }
+const rawEphemeralKeyPairs =
+typeof localStorage !== 'undefined'
+? localStorage.getItem('ephemeral-key-pairs')
+: null
+try {
+return rawEphemeralKeyPairs
+? decodeEphemeralKeyPairs(rawEphemeralKeyPairs)
+: {}
+} catch (error) {
+// eslint-disable-next-line no-console
+console.warn(
+'Failed to decode ephemeral key pairs from localStorage',
+error
+)
+return {}
+}
 }
 
 const EphemeralKeyPairEncoding = {
-  decode: (e: any) => EphemeralKeyPair.fromBytes(e.data),
-  encode: (e: EphemeralKeyPair) => ({
-    __type: 'EphemeralKeyPair',
-    data: e.bcsToBytes(),
-  }),
+decode: (e: any) => EphemeralKeyPair.fromBytes(e.data),
+encode: (e: EphemeralKeyPair) => ({
+\_\_type: 'EphemeralKeyPair',
+data: e.bcsToBytes(),
+}),
 }
 
 export const encodeEphemeralKeyPairs = (
-  keyPairs: StoredEphemeralKeyPairs
+keyPairs: StoredEphemeralKeyPairs
 ): string =>
-  JSON.stringify(keyPairs, (_, e) => {
-    if (typeof e === 'bigint') return { __type: 'bigint', value: e.toString() }
-    if (e instanceof Uint8Array)
-      return { __type: 'Uint8Array', value: Array.from(e) }
-    if (e instanceof EphemeralKeyPair) return EphemeralKeyPairEncoding.encode(e)
-    return e
-  })
+JSON.stringify(keyPairs, (\_, e) => {
+if (typeof e === 'bigint') return { **type: 'bigint', value: e.toString() }
+if (e instanceof Uint8Array)
+return { **type: 'Uint8Array', value: Array.from(e) }
+if (e instanceof EphemeralKeyPair) return EphemeralKeyPairEncoding.encode(e)
+return e
+})
 
 export const decodeEphemeralKeyPairs = (
-  encodedEphemeralKeyPairs: string
+encodedEphemeralKeyPairs: string
 ): StoredEphemeralKeyPairs =>
-  JSON.parse(encodedEphemeralKeyPairs, (_, e) => {
-    if (e && e.__type === 'bigint') return BigInt(e.value)
-    if (e && e.__type === 'Uint8Array') return new Uint8Array(e.value)
-    if (e && e.__type === 'EphemeralKeyPair')
-      return EphemeralKeyPairEncoding.decode(e)
-    return e
-  })
+JSON.parse(encodedEphemeralKeyPairs, (\_, e) => {
+if (e && e.**type === 'bigint') return BigInt(e.value)
+if (e && e.**type === 'Uint8Array') return new Uint8Array(e.value)
+if (e && e.\_\_type === 'EphemeralKeyPair')
+return EphemeralKeyPairEncoding.decode(e)
+return e
+})
 
 export default function useEphemeralKeyPair() {
-  const ephemeralKeyPair = EphemeralKeyPair.generate()
-  storeEphemeralKeyPair(ephemeralKeyPair)
+const ephemeralKeyPair = EphemeralKeyPair.generate()
+storeEphemeralKeyPair(ephemeralKeyPair)
 
-  return ephemeralKeyPair
+return ephemeralKeyPair
 }
-```
+
+````
 
 </details>
 
@@ -2144,18 +2073,13 @@ export function getAptosClient() {
   const config = new AptosConfig({ network: Network.TESTNET })
   return new Aptos(config)
 }
-```
+````
+
 </details>
-
-
-
-
-
 
 ## Tailwind CSS
 
 [Tailwind CSS](https://tailwindcss.com/docs/installation) 是一个实用优先的 CSS 框架，它提供了一套低级的、原子化的类，可以用来快速构建响应式布局和组件。
-
 
 ## `Next.js` 中的路由
 
@@ -2218,21 +2142,21 @@ https://nextjs.org/docs/app/building-your-application/routing
 
 以下是一个简单的带登录功能的博客网站示例，使用 Next.js 13 的 `app` 路由器。
 
-1. **_app.js** - 应用根组件，包含全局样式和状态管理。
+1. **\_app.js** - 应用根组件，包含全局样式和状态管理。
 
 ```jsx
-import '../styles/globals.css';
+import '../styles/globals.css'
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} />
 }
 ```
 
-2. **_layout.js** - 定义博客网站的布局。
+2. **\_layout.js** - 定义博客网站的布局。
 
 ```jsx
-import Navbar from './navbar';
-import Footer from './footer';
+import Navbar from './navbar'
+import Footer from './footer'
 
 export default function RootLayout({ children }) {
   return (
@@ -2246,14 +2170,14 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
-  );
+  )
 }
 ```
 
 3. **pages/index.js** - 首页，展示博客文章列表。
 
 ```jsx
-import { getPosts } from '../lib/posts';
+import { getPosts } from '../lib/posts'
 
 export default function Home({ posts }) {
   return (
@@ -2265,34 +2189,34 @@ export default function Home({ posts }) {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 export async function getStaticProps() {
-  const posts = await getPosts();
+  const posts = await getPosts()
   return {
     props: {
       posts,
     },
-  };
+  }
 }
 ```
 
 4. **pages/login.js** - 登录页面。
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // 这里应该有登录逻辑，验证用户名和密码
     // 假设登录成功
-    alert('Login successful!');
-  };
+    alert('Login successful!')
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -2310,7 +2234,7 @@ export default function Login() {
       />
       <button type="submit">Login</button>
     </form>
-  );
+  )
 }
 ```
 
@@ -2323,7 +2247,7 @@ export async function getPosts() {
     { id: 1, title: 'First Post' },
     { id: 2, title: 'Second Post' },
     // 更多文章...
-  ];
+  ]
 }
 ```
 
@@ -2331,27 +2255,24 @@ export async function getPosts() {
 
 ```javascript
 export function middleware(req) {
-  const { pathname } = req.nextUrl;
+  const { pathname } = req.nextUrl
   // 如果用户未登录且尝试访问受保护的页面，则重定向到登录页面
   if (!isUserLoggedIn() && pathname !== '/login') {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(new URL('/login', req.url))
   }
 }
 
 function isUserLoggedIn() {
   // 这里应该有检查用户是否登录的逻辑
-  return false;
+  return false
 }
 ```
 
 请注意，这个示例仅用于演示目的，实际的登录逻辑需要实现用户认证和授权，可能涉及到后端服务和数据库操作。此外，Next.js 13 的 `app` 路由器仍在开发中，可能在最终发布时会有变化。
 
-
 ### `pages` 路由
 
 https://nextjs.org/docs/pages/building-your-application/routing
-
-
 
 在 Next.js 中，页面路由系统是基于文件系统构建的。这意味着你可以通过创建文件和文件夹来定义路由。Next.js 会自动将文件名映射到路由路径。例如，如果你创建一个名为 `pages/about.js` 的文件，Next.js 会自动创建一个 `/about` 路由。
 
@@ -2378,7 +2299,7 @@ https://nextjs.org/docs/pages/building-your-application/routing
 ##### pages/index.js
 
 ```jsx
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/LoginForm'
 
 export default function Home() {
   return (
@@ -2386,27 +2307,27 @@ export default function Home() {
       <h1>Welcome to My Blog</h1>
       <LoginForm />
     </div>
-  );
+  )
 }
 ```
 
 ##### pages/login.js
 
 ```jsx
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // 这里应该有登录逻辑，比如调用API
     // 假设登录成功后，跳转到博客文章页面
-    router.push('/blog/my-first-post');
-  };
+    router.push('/blog/my-first-post')
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -2424,35 +2345,35 @@ export default function Login() {
       />
       <button type="submit">Login</button>
     </form>
-  );
+  )
 }
 ```
 
 ##### pages/blog/[slug].js
 
 ```jsx
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 export default function BlogPost() {
-  const router = useRouter();
-  const { slug } = router.query;
+  const router = useRouter()
+  const { slug } = router.query
 
   return (
     <div>
       <h1>Blog Post: {slug}</h1>
       {/* 这里应该有博客文章的内容 */}
     </div>
-  );
+  )
 }
 ```
 
-##### pages/_app.js
+##### pages/\_app.js
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   return (
     <div>
@@ -2462,25 +2383,25 @@ export default function MyApp({ Component, pageProps }) {
         <LoginForm onLogin={(user) => setUser(user)} />
       )}
     </div>
-  );
+  )
 }
 ```
 
 ##### components/LoginForm.js
 
 ```jsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function LoginForm({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // 这里应该有登录逻辑，比如调用API
     // 假设登录成功后，调用 onLogin 函数
-    onLogin({ email, password });
-  };
+    onLogin({ email, password })
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -2498,60 +2419,13 @@ export default function LoginForm({ onLogin }) {
       />
       <button type="submit">Login</button>
     </form>
-  );
+  )
 }
 ```
 
 这个示例中，`_app.js` 负责管理全局状态，包括用户登录状态。`LoginForm` 组件用于处理登录逻辑，并在用户登录成功后，通过 `onLogin` 回调函数将用户信息传递给 `_app.js`。`index.js` 和 `login.js` 分别是主页和登录页面，`blog/[slug].js` 是博客文章页面。
 
 请注意，这个示例没有包含实际的登录验证逻辑，你需要根据实际情况添加 API 调用和状态管理。此外，为了安全起见，密码应该使用加密方式处理，而不是明文存储或传输。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ```tsx
 import Image from 'next/image'
@@ -2672,6 +2546,4 @@ export default function Home() {
     </>
   )
 }
-
 ```
-
